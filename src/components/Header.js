@@ -57,7 +57,7 @@ function Header(props) {
             <Toolbar >
                   {arrow(props)}
                   <div className={classes.searchIcon}>
-                    <Link to="/" className='main-link'> Мега помошник </Link>
+                    <Link to="/" className='main-link'> МегаПомошник </Link>
                   </div>
               <div className={classes.grow} />
             </Toolbar>
