@@ -1,10 +1,41 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import Divider from 'material-ui/Divider';
-import { List, ListItem } from 'material-ui/List';
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Folder from '@material-ui/icons/Folder';
+
 import data from '../data/MegaPomoshnik';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../redux/action';
+
+
+const Tree = (data) => ( 
+    data.data[0].result.map((res, index) => 
+    <ListItem key={index}>
+      <ListItemAvatar >
+          <Avatar className='info-bg'>
+            <Folder />
+          </Avatar>
+      </ListItemAvatar>
+      <Link
+        to={{
+              pathname: `/detail/${res.id}/${res.text}`,
+              state: { 
+                  detail: res 
+              }
+            }}
+          style={{ textDecoration: 'none', textTransform: 'uppercase', color: '#6a6a6b' }}>
+              <ListItemText primary={res.text}  />
+      </Link>
+      <Divider />
+    </ListItem>
+  ) 
+);
 
 class MainContainer extends PureComponent {
   
@@ -19,25 +50,7 @@ class MainContainer extends PureComponent {
     render() {
         return (
         <div>
-            <List className="list-services">
-            {this.state.data.map((res, index) => (
-                <Link
-                to={{
-                    pathname: `/info/${res.tid}/${res.method}`,
-                    state: { 
-                        detail: res 
-                    }
-                }}
-                style={{ textDecoration: 'none' }}
-                key={index}
-                >
-                <ListItem>
-                    <strong>{res.method}</strong>
-                </ListItem>
-                <Divider />
-                </Link>
-            ))}
-            </List>
+            <Tree data={this.state.data}  />
         </div>
     );
   }

@@ -1,11 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Media from 'react-media';
+
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -29,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    left: '45%'
+    left: '45%',
+    
   },
 }));
 
@@ -38,21 +42,28 @@ function _handleClick(props) {
   length < 4 ? push('/') : goBack();
 };
 
+function arrow(props) {
+  const { location: { pathname } } = props
+  return pathname === '/' ? '' : <ArrowBack onClick={() => _handleClick(props)}/> 
+}
+
 function Header(props) {
   const classes = useStyles();
-
+  
   return (
     <div className={classes.grow}>
       <div className={classes.search}>
-      <AppBar position="static" c>
-        <Toolbar >
-              <ArrowBack onClick={() => _handleClick(props)}/>
-              <div className={classes.searchIcon}>
-                <Link to="/" className='main-link'> Мега помошник </Link>
-              </div>
-          <div className={classes.grow} />
-        </Toolbar>
-      </AppBar>
+
+          <AppBar position="static">
+            <Toolbar >
+                  {arrow(props)}
+                  <div className={classes.searchIcon}>
+                    <Link to="/" className='main-link'> Мега помошник </Link>
+                  </div>
+              <div className={classes.grow} />
+            </Toolbar>
+          </AppBar>
+
       </div>
     </div>
   );

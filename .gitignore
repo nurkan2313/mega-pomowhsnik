@@ -24,3 +24,5 @@ yarn-error.log*
 
 build/static/css/*.map
 build/static/js/*.map
+
+package-lock.json
