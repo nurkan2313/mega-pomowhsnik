@@ -86,7 +86,7 @@ ul>div>li {
     border-radius:50px;
     height:60px;
     margin-right:30px;
-    margin-top:30px!impo;
+    margin-top:30px!important;
 }
 ul>div>li>a {
     text-decoration:none;
@@ -97,12 +97,22 @@ ul>div>li>a {
     font-family: Roboto, sans-serif;
 }
 
-@media(min-width: 780px){
-    .makeStyles-searchIcon-3 {
-        left: 20%;
+.searchIcon {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 45%;
+    width: 160px;
+}
+
+@media screen and (max-width: 780px) {
+    .searchIcon  {
+        left: 17px;
     }
   }
-  body {}
+
 .jss1 {
     position: fixed;
     z-index: 9999;
@@ -150,4 +160,11 @@ ul>div>li>a {
 
 ul.MuiList-root.MuiList-padding {
     padding-top: 0px;
+}
+li.MuiListItem-root.MuiListItem-gutters {
+    margin-top: 20px;
+}
+
+.jss3 {
+    left: 20%!important;
 }

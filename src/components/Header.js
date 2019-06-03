@@ -24,16 +24,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0,
     width: '100%',
   },
-  searchIcon: {
-    width: theme.spacing(20),
-    height: '100%',
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    left: '45%',
-    
-  },
+ 
 }));
 
 function _handleClick(props) {
@@ -56,7 +47,7 @@ function Header(props) {
           <AppBar position="static">
             <Toolbar >
                   {arrow(props)}
-                  <div className={classes.searchIcon}>
+                  <div className="searchIcon">
                     <Link to="/" className='main-link'> МегаПомощник </Link>
                   </div>
               <div className={classes.grow} />
