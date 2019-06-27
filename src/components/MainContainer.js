@@ -8,14 +8,54 @@ import Divider from '@material-ui/core/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Folder from '@material-ui/icons/Folder';
+import Info from '@material-ui/icons/Info';
 
 import data from '../data/MegaPomoshnik';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../redux/action';
 
-
 const Tree = (data) => ( 
     data.data[0].result.map((res, index) => 
+    !!(res.children) ?
+      <ListItem key={index}>
+        <ListItemAvatar >
+            <Avatar className='info-bg'>
+              <Folder />
+            </Avatar>
+        </ListItemAvatar>
+        <Link
+          to={{
+                pathname: `/detail/${res.id}/${res.text}`,
+                state: { 
+                    detail: res 
+                }
+              }}
+            style={{ textDecoration: 'none', textTransform: 'uppercase', color: '#6a6a6b' }}>
+                <ListItemText primary={res.text}  />
+        </Link>
+        <Divider />
+      </ListItem>
+    :
+    (res.command === '') ? 
+    <ListItem key={index}>
+      <ListItemAvatar >
+        <Avatar >
+          <Info />
+        </Avatar>
+      </ListItemAvatar>
+      <Link
+        to={{
+              pathname: `/detail/${res.id}/${res.text}`,
+              state: { 
+                  detail: res 
+              }
+            }}
+          style={{ textDecoration: 'none', textTransform: 'uppercase', color: 'purple' }}>
+              <ListItemText primary={res.text}  />
+      </Link>
+      <Divider />
+    </ListItem>
+    :
     <ListItem key={index}>
       <ListItemAvatar >
           <Avatar className='info-bg'>
@@ -45,6 +85,7 @@ class MainContainer extends PureComponent {
 
     componentDidMount() {
         this.props.itemsFetchData(data);
+        console.log(data)
     }
 
     render() {

@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Folder from '@material-ui/icons/FolderOpen';
-import Circle from '@material-ui/icons/TurnedInNot';
+import Asterisk from '@material-ui/icons/PhoneForwarded';
 
 import HtmlToReactParser from 'html-to-react';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,33 +25,6 @@ const styles = {
 };
 
 const htmlToReactParser = new HtmlToReactParser.Parser();
-
-const SubTree = (subdata) => (
-  <ul>
-    {!!(subdata.data) ? subdata.data.map(
-      res => (
-        <li> 
-          {!!(res.description) ? 
-            <Link
-                to={{
-                    pathname: `/description/${res.id}/${res.text}`,
-                    state: { 
-                        detail: res 
-                    }
-                }}
-                style={{ textDecoration: 'none' }}
-            >
-                {res.text}
-            </Link> : <h4 style={{color: 'red'}}> {res.text} </h4>
-          } 
-          {!!(res.children) ? <SubTree data={res.children} /> :  null}
-
-        </li>
-      )
-    ) : null
-        }
-  </ul>
-);
 
 const Tree = (data) => (
   !!(data.data.children) ?
@@ -81,9 +54,7 @@ const Tree = (data) => (
             !!(res.description) ? 
             <React.Fragment>
               <ListItemAvatar style={{color: '#26469e'}}>
-                  <Avatar className='info-bg'>
-                    <Folder />
-                  </Avatar>
+                    <Asterisk />
               </ListItemAvatar>
               <Link
                   to={{
@@ -94,17 +65,12 @@ const Tree = (data) => (
                   }}
                   style={{ textDecoration: 'none' }}
               >
-                  <ListItemText primary={res.text}  style={{color: 'red'}}/>
+                  <ListItemText primary={res.text}/>
               </Link> 
               </React.Fragment>
               : 
               <React.Fragment>
-                <ListItemAvatar style={{color: '#26469e'}}>
-                  <Avatar className='info-bg'>
-                    <Circle />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={res.text}  />
+                <p className="info-divider">{res.text}</p>
               </React.Fragment>
         }
     </ListItem>

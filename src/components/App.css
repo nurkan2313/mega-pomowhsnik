@@ -168,3 +168,7 @@ li.MuiListItem-root.MuiListItem-gutters {
 .jss3 {
     left: 20%!important;
 }
+.info-divider {
+    color: #047327;
+    font-weight: 700;
+}
